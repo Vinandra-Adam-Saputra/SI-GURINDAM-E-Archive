@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: oklch(0.98 0.005 240);
+  --color-foreground: oklch(0.2 0.02 240);
+
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.2 0.02 240);
+
+  --color-popover: oklch(1 0 0);
+  --color-popover-foreground: oklch(0.2 0.02 240);
+
+  --color-primary: oklch(0.45 0.18 260); /* Deep Indigo */
+  --color-primary-foreground: oklch(0.98 0.005 240);
+
+  --color-secondary: oklch(0.65 0.15 160); /* Emerald Green */
+  --color-secondary-foreground: oklch(0.98 0.005 240);
+
+  --color-muted: oklch(0.95 0.01 240);
+  --color-muted-foreground: oklch(0.4 0.02 240);
+
+  --color-accent: oklch(0.9 0.05 260);
+  --color-accent-foreground: oklch(0.3 0.1 260);
+
+  --color-destructive: oklch(0.55 0.22 25);
+  --color-destructive-foreground: oklch(0.98 0.005 240);
+
+  --color-border: oklch(0.9 0.01 240);
+  --color-input: oklch(0.9 0.01 240);
+  --color-ring: oklch(0.45 0.18 260);
+
+  --radius-lg: 1rem;
+  --radius-md: 0.75rem;
+  --radius-sm: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+  .gradient-primary {
+    @apply bg-gradient-to-br from-primary to-primary/80;
+  }
+  .gradient-secondary {
+    @apply bg-gradient-to-br from-secondary to-secondary/80;
+  }
+}
