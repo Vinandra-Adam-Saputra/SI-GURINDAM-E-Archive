@@ -1,7 +1,8 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-export async function middleware(request: NextRequest) {
+// ✅ Ganti nama fungsi dari "middleware" menjadi "proxy"
+export async function proxy(request: NextRequest) {
   let response = NextResponse.next({
     request: {
       headers: request.headers,
@@ -54,19 +55,16 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  // Menggunakan getUser() lebih aman daripada getSession() di middleware
   const { data: { user } } = await supabase.auth.getUser()
 
   const isLoginPage = request.nextUrl.pathname === '/login'
   const isDashboardPage = request.nextUrl.pathname.startsWith('/dashboard')
   const isRootPage = request.nextUrl.pathname === '/'
 
-  // Jika mencoba akses dashboard tanpa user, redirect ke login
   if (isDashboardPage && !user) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
-  // Jika sudah login dan mencoba ke halaman login atau root, redirect ke dashboard
   if (user && (isLoginPage || isRootPage)) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
