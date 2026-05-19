@@ -1,7 +1,6 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-// ✅ Ganti nama fungsi dari "middleware" menjadi "proxy"
 export async function proxy(request: NextRequest) {
   let response = NextResponse.next({
     request: {

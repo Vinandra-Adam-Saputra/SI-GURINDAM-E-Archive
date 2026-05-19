@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { UserPlus, Shield, X, Edit2, Trash2, CheckCircle2 } from 'lucide-react'
+import { UserPlus, Shield, X, Edit2, Trash2, CheckCircle2, Users } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 type Profile = {
