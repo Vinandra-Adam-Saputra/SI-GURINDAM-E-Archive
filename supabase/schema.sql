@@ -25,11 +25,33 @@ CREATE POLICY "Admins can manage all profiles" ON public.profiles
   );
 
 -- Categories table
+CREATE TABLE public.kegiatan (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  nama_kegiatan TEXT NOT NULL,
+  deskripsi TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  created_by UUID REFERENCES auth.users(id) ON DELETE SET NULL
+);
+
+ALTER TABLE public.kegiatan ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Everyone authenticated can view kegiatan" ON public.kegiatan
+  FOR SELECT USING (auth.role() = 'authenticated');
+
+CREATE POLICY "Authorized roles can manage kegiatan" ON public.kegiatan
+  FOR ALL USING (
+    EXISTS (
+      SELECT 1 FROM public.profiles
+      WHERE id = auth.uid() AND (role = 'admin' OR role = 'bendahara')
+    )
+  );
+
 CREATE TABLE public.categories (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   name TEXT NOT NULL,
   description TEXT,
   scope TEXT NOT NULL CHECK (scope IN ('arsip', 'bendahara')),
+  kegiatan_id UUID REFERENCES public.kegiatan(id) ON DELETE CASCADE,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 

@@ -12,7 +12,8 @@ import {
   LogOut, 
   Menu,
   X,
-  ChevronRight
+  ChevronRight,
+  FolderOpen
 } from 'lucide-react'
 import ModernModal from '@/components/ModernModal'
 
@@ -77,16 +78,22 @@ export default function DashboardLayout({
       roles: ['admin', 'arsip', 'bendahara', 'direktur'],
     },
     {
+      title: 'Kelola Kegiatan',
+      icon: <FolderOpen size={22} />,
+      href: '/dashboard/kegiatan',
+      roles: ['admin', 'bendahara', 'direktur'],
+    },
+    {
       title: 'Manajemen Kategori',
       icon: <Settings size={22} />,
       href: '/dashboard/category-engine',
-      roles: ['admin', 'arsip', 'bendahara'],
+      roles: ['admin', 'arsip'],
     },
     {
       title: 'Arsip Dokumen',
       icon: <FileText size={22} />,
       href: '/dashboard/documents',
-      roles: ['admin', 'arsip', 'bendahara', 'direktur'],
+      roles: ['admin', 'arsip', 'direktur'],
     },
     {
       title: 'Kelola Pengguna',
